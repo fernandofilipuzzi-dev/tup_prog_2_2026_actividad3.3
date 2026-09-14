@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             groupBox3 = new GroupBox();
+            label2 = new Label();
+            label1 = new Label();
+            tbCantidadCabezas = new TextBox();
             label7 = new Label();
             tbPeriodoActividad = new TextBox();
             tbDescripcionActividad = new TextBox();
@@ -42,6 +45,9 @@
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(label2);
+            groupBox3.Controls.Add(label1);
+            groupBox3.Controls.Add(tbCantidadCabezas);
             groupBox3.Controls.Add(label7);
             groupBox3.Controls.Add(tbPeriodoActividad);
             groupBox3.Controls.Add(tbDescripcionActividad);
@@ -49,14 +55,42 @@
             groupBox3.Controls.Add(label6);
             groupBox3.Controls.Add(cmbTipoActividad);
             groupBox3.Controls.Add(btnAltaActividad);
-            groupBox3.Location = new Point(15, 17);
+            groupBox3.Location = new Point(13, 17);
             groupBox3.Margin = new Padding(4);
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new Padding(4);
-            groupBox3.Size = new Size(649, 175);
+            groupBox3.Size = new Size(649, 225);
             groupBox3.TabIndex = 15;
             groupBox3.TabStop = false;
             groupBox3.Text = "Alta de actividad (4)";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(412, 181);
+            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(117, 21);
+            label2.TabIndex = 19;
+            label2.Text = "Caso ganaderia";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(83, 181);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(151, 21);
+            label1.TabIndex = 18;
+            label1.Text = "Cantidad de cabezas";
+            // 
+            // tbCantidadCabezas
+            // 
+            tbCantidadCabezas.Location = new Point(257, 178);
+            tbCantidadCabezas.Margin = new Padding(4);
+            tbCantidadCabezas.Name = "tbCantidadCabezas";
+            tbCantidadCabezas.Size = new Size(127, 29);
+            tbCantidadCabezas.TabIndex = 17;
             // 
             // label7
             // 
@@ -106,12 +140,13 @@
             // cmbTipoActividad
             // 
             cmbTipoActividad.FormattingEnabled = true;
-            cmbTipoActividad.Items.AddRange(new object[] { "Agricola", "Ganadera" });
+            cmbTipoActividad.Items.AddRange(new object[] { "Agricola   (1)", "Ganadera - Cria (2)", "Ganadera - Ivernada (3)", "Ganadera - ReCria (3)" });
             cmbTipoActividad.Location = new Point(185, 35);
             cmbTipoActividad.Margin = new Padding(4);
             cmbTipoActividad.Name = "cmbTipoActividad";
             cmbTipoActividad.Size = new Size(199, 29);
             cmbTipoActividad.TabIndex = 8;
+            cmbTipoActividad.SelectedIndexChanged += cmbTipoActividad_SelectedIndexChanged;
             // 
             // btnAltaActividad
             // 
@@ -127,7 +162,7 @@
             // button1
             // 
             button1.DialogResult = DialogResult.Cancel;
-            button1.Location = new Point(263, 202);
+            button1.Location = new Point(263, 252);
             button1.Margin = new Padding(5, 6, 5, 6);
             button1.Name = "button1";
             button1.Size = new Size(151, 58);
@@ -139,7 +174,7 @@
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(675, 271);
+            ClientSize = new Size(675, 317);
             Controls.Add(button1);
             Controls.Add(groupBox3);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -164,5 +199,8 @@
         public TextBox tbPeriodoActividad;
         public TextBox tbDescripcionActividad;
         public ComboBox cmbTipoActividad;
+        private Label label2;
+        private Label label1;
+        public TextBox tbCantidadCabezas;
     }
 }

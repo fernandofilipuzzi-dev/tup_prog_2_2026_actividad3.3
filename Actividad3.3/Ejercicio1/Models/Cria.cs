@@ -6,7 +6,7 @@ public class Cria : Ganadera
     public int CantidadTerneroDestete { get; set; }
     public double PrecioTernero { get; set; }
 
-    public Cria(int periodo, string descripcion, int cantidad) : base(periodo, descripcion, cantidad)
+    public Cria(int periodo, string descripcion) : base(periodo, descripcion)
     {
     }
 

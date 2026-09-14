@@ -81,6 +81,7 @@
             button1.TabIndex = 8;
             button1.Text = "Agregar Actividad";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // btnAdministrarCampo
             // 

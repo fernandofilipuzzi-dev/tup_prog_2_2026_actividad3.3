@@ -4,7 +4,7 @@ public class ReCria : Ganadera
 {
     public int CantidadKilosCarneFinal { get; set; }
 
-    public ReCria(int periodo, string descripcion, int cantidad) : base(periodo, descripcion, cantidad)
+    public ReCria(int periodo, string descripcion) : base(periodo, descripcion)
     {
     }
 

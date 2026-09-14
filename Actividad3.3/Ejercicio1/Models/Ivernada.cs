@@ -6,7 +6,7 @@ public class Ivernada : Ganadera
     public int CantidadKilosCarneFinal { get; set; }
     public double PrecioKilo { get; set; }
 
-    public Ivernada(int periodo, string descripcion, int cantidad) : base(periodo, descripcion, cantidad)
+    public Ivernada(int periodo, string descripcion) : base(periodo, descripcion)
     {
     }
 

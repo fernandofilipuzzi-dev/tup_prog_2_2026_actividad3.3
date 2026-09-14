@@ -16,5 +16,10 @@ namespace Ejercicio1.Vistas.Adms
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

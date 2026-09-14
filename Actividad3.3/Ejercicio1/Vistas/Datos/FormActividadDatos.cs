@@ -4,17 +4,17 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+namespace Ejercicio1.Vistas;
 
-namespace Ejercicio1.Vistas
+public partial class FormActividadDatos : Form
 {
-    public partial class FormActividadDatos : Form
+    public FormActividadDatos()
     {
-        public FormActividadDatos()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
+
+    private void cmbTipoActividad_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        tbCantidadCabezas.Enabled = cmbTipoActividad.SelectedIndex > 0;
     }
 }

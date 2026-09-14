@@ -56,11 +56,20 @@ public class Estancia
             case 1:
                 nueva = new Agricola(periodo, descripcion);
                 break;
-            //otras actividades
+            case 2:
+                nueva = new Cria(periodo, descripcion);
+                break;
+            case 3:
+                nueva = new Ivernada(periodo, descripcion);
+                break;
+            case 4:
+                nueva = new ReCria(periodo, descripcion);
+                break;
         }
 
         if(nueva!=null)
             actividades.Add(nueva);
+
         return nueva;
     }
 
@@ -70,11 +79,15 @@ public class Estancia
     }
     public Actividad VerActividad(int idx)
     {
+        /*
         if (idx >= 0 && idx < actividades.Count)
         {
             return actividades[idx] as Actividad;
         }
-        return null;
+        */
+
+        if (idx < 0 || idx >= actividades.Count) return null;        
+        return actividades[idx] as Actividad;        
     }
 
     #endregion

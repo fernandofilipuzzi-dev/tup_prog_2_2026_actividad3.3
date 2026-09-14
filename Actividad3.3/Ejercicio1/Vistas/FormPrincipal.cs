@@ -207,12 +207,44 @@ public partial class FormPrincipal : Form
             #region agregar una actividad
             else if (fActividadAdm.DialogResult == DialogResult.TryAgain)
             {
-                Actividad nuevo = SolicitarDatosActividad();
-                if (nuevo != null)
+                
+                FormActividadDatos fActividadDatos = new FormActividadDatos();
+
+                //solicito los valores al usuario
+                if (fActividadDatos.ShowDialog() == DialogResult.OK)
                 {
-                    if (estancia.AgregarActividad(nuevo.Periodo, nuevo.Descripcion, 0) != null)//teminar!!
+                    #region Solicitar datos actividad
+                    int periodo = Convert.ToInt32(fActividadDatos.tbPeriodoActividad.Text);
+                    string descripcion = fActividadDatos.tbDescripcionActividad.Text;
+                    int tipo = fActividadDatos.cmbTipoActividad.SelectedIndex+1;
+
+                    int cantidadCabezas = 0;
+                    if (!string.IsNullOrEmpty(fActividadDatos.tbCantidadCabezas.Text))
                     {
-                        fActividadAdm.lsbActividades.Items.Add(nuevo);
+                        cantidadCabezas = Convert.ToInt32(fActividadDatos.tbCantidadCabezas.Text);
+                    }
+                    #endregion
+
+                    Actividad nueva = estancia.AgregarActividad(periodo, descripcion, tipo);
+
+                    /*
+                     if(tipo==0)
+                     {
+                        Actividad nueva = estancia.AgregarActividad(periodo, descripcion, tipo);
+                     }
+                     else if(tipo==0)
+                     {
+                        Actividad nueva = estancia.AgregarActividad(periodo, descripcion, tipo, cantidadCabezas);
+                     }
+                     */
+
+                    if (nueva!=null)
+                    {
+                        if(nueva is Ganadera)
+                        {
+                            ((Ganadera)nueva).CantidadCabezas = cantidadCabezas;
+                        }
+                        fActividadAdm.lsbActividades.Items.Add(nueva);
                     }
                 }
             }
@@ -324,31 +356,6 @@ public partial class FormPrincipal : Form
         return null;
     }
 
-    protected Actividad SolicitarDatosActividad()
-    {
-        FormActividadDatos fActividadDatos = new FormActividadDatos();
-
-        //solicito los valores al usuario
-        if (fActividadDatos.ShowDialog() == DialogResult.OK)
-        {
-            int periodo = Convert.ToInt32(fActividadDatos.tbPeriodoActividad.Text);
-            string descripcion = fActividadDatos.tbDescripcionActividad.Text;
-            int tipo = fActividadDatos.cmbTipoActividad.SelectedIndex;
-
-            //el campo aquí es un modelo de datos, un objeto de transporte
-            Actividad actividad = null;
-            switch (tipo)
-            {
-                case 0:
-                    actividad = new Agricola(periodo,descripcion);
-                    break;
-            }
-
-            return actividad;
-        }
-
-        return null;
-    }
     #endregion
 
 }
