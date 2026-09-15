@@ -107,7 +107,10 @@ public partial class FormPrincipal : Form
             else if (fCamposAdm.DialogResult == DialogResult.Continue)
             {
                 int idx = fCamposAdm.lsbCampos.SelectedIndex;
-                AdministrarUnCampo(idx);
+                if (idx >= 0)
+                    AdministrarUnCampo(idx);
+                else
+                    MessageBox.Show("Seleccione un campo de la lista.");
             }
             #endregion
 
@@ -168,7 +171,10 @@ public partial class FormPrincipal : Form
                 else if (fCampoAdm.DialogResult == DialogResult.Continue)
                 {
                     int idx = fCampoAdm.lsbParcelas.SelectedIndex;
-                    ModificarParcela(campoSeleccionado, idx);
+                    if (idx >= 0)
+                        ModificarParcela(campoSeleccionado, idx);
+                    else
+                        MessageBox.Show("Seleccione una parcela de la lista.");
                 }
                 #endregion
 
@@ -276,7 +282,10 @@ public partial class FormPrincipal : Form
             else if (fActividadAdm.DialogResult == DialogResult.Continue)
             {
                 int idx = fActividadAdm.lsbActividades.SelectedIndex;
-                AdministrarUnaActividad(idx);
+                if (idx >= 0)
+                    AdministrarUnaActividad(idx);
+                else
+                    MessageBox.Show("Seleccione una actividad de la lista.");
             }
             #endregion
 
