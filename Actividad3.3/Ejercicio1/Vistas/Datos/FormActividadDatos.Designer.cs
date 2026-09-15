@@ -140,7 +140,7 @@
             // cmbTipoActividad
             // 
             cmbTipoActividad.FormattingEnabled = true;
-            cmbTipoActividad.Items.AddRange(new object[] { "Agricola   (1)", "Ganadera - Cria (2)", "Ganadera - Ivernada (3)", "Ganadera - ReCria (3)" });
+            cmbTipoActividad.Items.AddRange(new object[] { "Agricola   (1)", "Ganadera - Cria (2)", "Ganadera - Ivernada (3)", "Ganadera - ReCria (4)" });
             cmbTipoActividad.Location = new Point(185, 35);
             cmbTipoActividad.Margin = new Padding(4);
             cmbTipoActividad.Name = "cmbTipoActividad";

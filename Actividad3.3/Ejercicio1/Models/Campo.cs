@@ -18,7 +18,9 @@ public class Campo
 
     public bool CrearParcela(string identificador, double superficie)
     {
-        if ((superficie +SuperficieOcupada())<= SuperficieTotal && BuscarParcela(identificador) < 0)
+        //la superficie no puede ser cero y tiene que entrar en lo que queda sin parcelar,
+        //y el identificador tiene que ser único dentro del campo
+        if (superficie > 0 && (superficie +SuperficieOcupada())<= SuperficieTotal && BuscarParcela(identificador) < 0)
         {
             parcelas.Add(new Parcela(identificador, superficie));
             return true;
@@ -41,6 +43,34 @@ public class Campo
             return parcelas[idx];
         }
         return null;
+    }
+
+    //solo se modifica la superficie asignada, el identificador queda
+    public bool ModificarParcela(int idx, double superficie)
+    {
+        Parcela parcela = VerParcela(idx);
+        if (parcela != null)
+        {
+            //la superficie ocupada sin contar la parcela que estoy modificando
+            double ocupada = SuperficieOcupada() - parcela.Superficie;
+            if (superficie > 0 && (superficie + ocupada) <= SuperficieTotal)
+            {
+                parcela.Superficie = superficie;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool EliminarParcela(int idx)
+    {
+        Parcela parcela = VerParcela(idx);
+        if (parcela != null)
+        {
+            parcelas.Remove(parcela);
+            return true;
+        }
+        return false;
     }
 
     #endregion

@@ -16,7 +16,7 @@ public class Estancia
         //campos.Add(new Campo(idCampo1, supCampo1));
         campos.Add(campo);
         Casco = new Casco();
-        Casco.Encargado = "No designado";
+        Casco.Administrador = "No designado";
         AgregarPuesto("No designado");
     }
     #endregion
@@ -77,6 +77,17 @@ public class Estancia
     { 
         get { return actividades.Count; }
     }
+
+    //una parcela puede ser lote de una sola actividad a la vez
+    public bool EstaAsignada(Parcela parcela)
+    {
+        foreach (Actividad actividad in actividades)
+        {
+            if (actividad.TieneLote(parcela))
+                return true;
+        }
+        return false;
+    }
     public Actividad VerActividad(int idx)
     {
         /*
@@ -97,8 +108,23 @@ public class Estancia
 
     public Campo AgregarCampo(Campo campo)
     {
+        //el identificador tiene que ser único dentro de la estancia
+        //y la superficie no puede ser cero
+        if (campo == null || campo.SuperficieTotal <= 0 || BuscarCampo(campo.Identificador) != null)
+            return null;
+
         campos.Add(campo);  
         return campo;
+    }
+
+    public Campo BuscarCampo(string identificador)
+    {
+        foreach (Campo campo in campos)
+        {
+            if (campo.Identificador == identificador)
+                return campo;
+        }
+        return null;
     }
 
     public int CantidadCampos
@@ -117,6 +143,43 @@ public class Estancia
         }
         return null;
     }
+    #endregion
+
+    #region informes
+
+    //producción total de la estancia: la suma de lo que produce cada actividad
+    public double CalcularProduccionTotal()
+    {
+        double total = 0;
+        foreach (Actividad actividad in actividades)
+        {
+            //cada actividad sabe calcular lo suyo (polimorfismo)
+            total += actividad.CalcularProduccion();
+        }
+        return total;
+    }
+
+    //productividad general: porcentaje de la superficie de los campos
+    //que está ocupada por lotes asignados a alguna actividad
+    public double CalcularProductividadGeneral()
+    {
+        double ocupada = 0;
+        foreach (Actividad actividad in actividades)
+        {
+            ocupada += actividad.CalcularSuperficieOcupada();
+        }
+
+        double total = 0;
+        for (int idx = 0; idx < CantidadCampos; idx++)
+        {
+            total += VerCampo(idx).SuperficieTotal;
+        }
+
+        if (total > 0)
+            return ocupada / total * 100;
+        return 0;
+    }
+
     #endregion
 
 }
