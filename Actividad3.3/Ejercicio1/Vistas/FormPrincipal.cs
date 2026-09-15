@@ -594,9 +594,19 @@ public partial class FormPrincipal : Form
             formLoteDatos.cmbCampos.Items.Add(estancia.VerCampo(idx));
         }
 
+        //dejo elegido el primer campo para que ya se vean sus parcelas
+        if (formLoteDatos.cmbCampos.Items.Count > 0)
+        {
+            formLoteDatos.cmbCampos.SelectedIndex = 0;
+        }
+
         if (formLoteDatos.ShowDialog() == DialogResult.OK)
         {
             Parcela parcela = formLoteDatos.lsbParcelas.SelectedItem as Parcela;
+            if (parcela == null)
+            {
+                MessageBox.Show("Seleccione una parcela de la lista.");
+            }
             return parcela;
         }
 
