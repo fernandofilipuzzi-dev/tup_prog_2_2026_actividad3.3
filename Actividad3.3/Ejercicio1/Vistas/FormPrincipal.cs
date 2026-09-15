@@ -585,6 +585,19 @@ public partial class FormPrincipal : Form
 
     protected Parcela SolicitarLote()
     {
+        //si ningún campo tiene parcelas no hay nada para asignar,
+        //primero hay que parcelar un campo (caso 7)
+        int cantidadParcelas = 0;
+        for (int idx = 0; idx < estancia.CantidadCampos; idx++)
+        {
+            cantidadParcelas += estancia.VerCampo(idx).CantidadParcelas;
+        }
+        if (cantidadParcelas == 0)
+        {
+            MessageBox.Show("Ningún campo de la estancia tiene parcelas. Primero parcele un campo (Administración - Campos).");
+            return null;
+        }
+
         FormLoteDatos formLoteDatos = new FormLoteDatos();
 
         //cargo los campos como objetos en el combo, el formulario
@@ -605,7 +618,10 @@ public partial class FormPrincipal : Form
             Parcela parcela = formLoteDatos.lsbParcelas.SelectedItem as Parcela;
             if (parcela == null)
             {
-                MessageBox.Show("Seleccione una parcela de la lista.");
+                if (formLoteDatos.lsbParcelas.Items.Count == 0)
+                    MessageBox.Show("El campo elegido no tiene parcelas.");
+                else
+                    MessageBox.Show("Seleccione una parcela de la lista.");
             }
             return parcela;
         }
